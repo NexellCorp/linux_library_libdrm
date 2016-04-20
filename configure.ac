@@ -112,6 +112,11 @@ AC_ARG_ENABLE(exynos-experimental-api,
 	      [Enable support for EXYNOS's experimental API (default: disabled)]),
 	      [EXYNOS=$enableval], [EXYNOS=no])
 
+AC_ARG_ENABLE(nexell,
+	      AS_HELP_STRING([--enable-nexell],
+	      [Enable support for nexell (default: disabled)]),
+	      [NEXELL=$enableval], [NEXELL=no])
+
 AC_ARG_ENABLE(freedreno,
 	      AS_HELP_STRING([--disable-freedreno],
 	      [Enable support for freedreno's KMS API (default: auto, enabled on arm)]),
@@ -352,6 +357,11 @@ if test "x$EXYNOS" = xyes; then
 	AC_DEFINE(HAVE_EXYNOS, 1, [Have EXYNOS support])
 fi
 
+AM_CONDITIONAL(HAVE_NEXELL, [test "x$NEXELL" = xyes])
+if test "x$NEXELL" = xyes; then
+	AC_DEFINE(HAVE_NEXELL, 1, [Have NEXELL support])
+fi
+
 AM_CONDITIONAL(HAVE_FREEDRENO, [test "x$FREEDRENO" = xyes])
 if test "x$FREEDRENO" = xyes; then
 	AC_DEFINE(HAVE_FREEDRENO, 1, [Have freedreno support])
@@ -518,6 +528,8 @@ AC_CONFIG_FILES([
 	omap/libdrm_omap.pc
 	exynos/Makefile
 	exynos/libdrm_exynos.pc
+	nexell/Makefile
+	nexell/libdrm_nexell.pc
 	freedreno/Makefile
 	freedreno/libdrm_freedreno.pc
 	tegra/Makefile
@@ -552,6 +564,7 @@ echo "  AMDGPU API     $AMDGPU"
 echo "  Nouveau API    $NOUVEAU"
 echo "  OMAP API       $OMAP"
 echo "  EXYNOS API     $EXYNOS"
+echo "  NEXELL API     $NEXELL"
 echo "  Freedreno API  $FREEDRENO (kgsl: $FREEDRENO_KGSL)"
 echo "  Tegra API      $TEGRA"
 echo "  VC4 API        $VC4"
