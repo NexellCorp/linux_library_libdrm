@@ -34,6 +34,7 @@ AM_DISTCHECK_CONFIGURE_FLAGS = \
 	--enable-vmwgfx \
 	--enable-omap-experimental-api \
 	--enable-exynos-experimental-api \
+	--enable-nexell \
 	--enable-freedreno \
 	--enable-freedreno-kgsl\
 	--enable-tegra-experimental-api \
