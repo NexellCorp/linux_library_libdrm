@@ -58,6 +58,7 @@ libdrm_freedreno.pc
 libdrm_amdgpu.pc
 libdrm_vc4.pc
 libdrm_etnaviv.pc
+libdrm_nexell.pc
 libkms.pc
 libtool
 ltmain.sh
