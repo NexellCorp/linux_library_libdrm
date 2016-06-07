@@ -61,10 +61,6 @@ LT_PREREQ([2.2])
 LT_INIT([disable-static])
 
 
-PKG_CHECK_MODULES(PTHREADSTUBS, pthread-stubs)
-AC_SUBST(PTHREADSTUBS_CFLAGS)
-AC_SUBST(PTHREADSTUBS_LIBS)
-
 pkgconfigdir=${libdir}/pkgconfig
 AC_SUBST(pkgconfigdir)
 AC_ARG_ENABLE([udev],
