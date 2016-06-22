@@ -73,3 +73,6 @@ TESTS +=					\
 endif
 
 check_PROGRAMS += $(TESTS)
+
+check-programs:
+	@echo $(check_PROGRAMS)
