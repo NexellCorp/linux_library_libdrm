@@ -87,9 +87,6 @@ int nx_alloc_gem(int drm_fd, int size, int flags)
 		return ret;
 	}
 
-	printf("[DRM ALLOC] gem %d, size %d, flags 0x%x\n",
-	       arg.handle, size, flags);
-
 	return arg.handle;
 }
 
