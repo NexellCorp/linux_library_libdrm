@@ -1,6 +1,6 @@
 Name:           libdrm
 Summary:        Direct Rendering Manager runtime library
-Version:        2.4.68
+Version:        2.4.70
 Release:        20%{?dist}
 License:        MIT
 
