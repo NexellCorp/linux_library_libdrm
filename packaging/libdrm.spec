@@ -92,6 +92,7 @@ done
 %postun -p /sbin/ldconfig
 
 %files
+%license LICENSE.MIT
 %doc README
 %{_libdir}/libdrm.so.2
 %{_libdir}/libdrm.so.2.4.0
@@ -124,6 +125,7 @@ done
 %{_libdir}/libkms.so.1.0.0
 
 %files -n drm-utils
+%license LICENSE.MIT
 %{_bindir}/dristat
 %{_bindir}/drmstat
 %{_bindir}/drmdevice
@@ -140,6 +142,7 @@ done
 %exclude %{_bindir}/random
 
 %files devel
+%license LICENSE.MIT
 # FIXME should be in drm/ too
 %{_includedir}/xf86drm.h
 %{_includedir}/xf86drmMode.h
