@@ -16,7 +16,7 @@ Build-Depends:
  libpciaccess-dev,
  valgrind [amd64 armhf i386 mips mipsel powerpc s390x],
  libbsd-dev [kfreebsd-any],
-Standards-Version: 3.9.6
+Standards-Version: 3.9.8
 Section: libs
 Vcs-Git: https://anonscm.debian.org/git/pkg-xorg/lib/libdrm.git
 Vcs-Browser: https://anonscm.debian.org/cgit/pkg-xorg/lib/libdrm.git
@@ -34,7 +34,8 @@ Depends:
  libdrm-omap1 (= ${binary:Version}) [any-arm],
  libdrm-freedreno1 (= ${binary:Version}) [any-arm arm64],
  libdrm-exynos1 (= ${binary:Version}) [any-arm],
- libdrm-tegra0 (= ${binary:Version}) [any-arm],
+ libdrm-tegra0 (= ${binary:Version}) [any-arm arm64],
+ libdrm-nexell (= ${binary:Version}) [any-arm arm64],
  ${misc:Depends},
 Multi-Arch: same
 Description: Userspace interface to kernel DRM services -- development files
@@ -274,7 +275,7 @@ Description: Userspace interface to exynos-specific kernel DRM services -- debug
  This package provides the debugging symbols for the libdrm-exynos1 package.
 
 Package: libdrm-tegra0
-Architecture: any-arm
+Architecture: any-arm arm64
 Depends:
  ${shlibs:Depends},
  ${misc:Depends},
@@ -290,7 +291,7 @@ Description: Userspace interface to tegra-specific kernel DRM services -- runtim
 Package: libdrm-tegra0-dbg
 Section: debug
 Priority: extra
-Architecture: any-arm
+Architecture: any-arm arm64
 Depends:
  libdrm-tegra0 (= ${binary:Version}),
  ${misc:Depends},
@@ -303,6 +304,37 @@ Description: Userspace interface to tegra-specific kernel DRM services -- debugg
  OpenGL drivers.
  .
  This package provides the debugging symbols for the libdrm-tegra0 package.
+
+Package: libdrm-nexell
+Architecture: any-arm arm64
+Depends:
+ ${shlibs:Depends},
+ ${misc:Depends},
+Pre-Depends: ${misc:Pre-Depends}
+Multi-Arch: same
+Description: Userspace interface to nexell-specific kernel DRM services -- runtime
+ This library implements the userspace interface to the kernel DRM
+ services.  DRM stands for "Direct Rendering Manager", which is the
+ kernelspace portion of the "Direct Rendering Infrastructure" (DRI).
+ The DRI is currently used on Linux to provide hardware-accelerated
+ OpenGL drivers.
+
+Package: libdrm-nexell-dbg
+Section: debug
+Priority: extra
+Architecture: any-arm arm64
+Depends:
+ libdrm-nexell (= ${binary:Version}),
+ ${misc:Depends},
+Multi-Arch: same
+Description: Userspace interface to nexell-specific kernel DRM services -- debugging symbols
+ This library implements the userspace interface to the kernel DRM
+ services.  DRM stands for "Direct Rendering Manager", which is the
+ kernelspace portion of the "Direct Rendering Infrastructure" (DRI).
+ The DRI is currently used on Linux to provide hardware-accelerated
+ OpenGL drivers.
+ .
+ This package provides the debugging symbols for the libdrm-nexell package.
 
 Package: libdrm-amdgpu1
 Architecture: any
