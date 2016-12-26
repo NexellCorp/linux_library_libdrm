@@ -366,3 +366,10 @@ Description: Userspace interface to amdgpu-specific kernel DRM services -- debug
  OpenGL drivers.
  .
  This package provides the debugging symbols for the libdrm-amdgpu1 package.
+
+Package: drm-utils
+Section: Graphics
+Priority: extra
+Architecture: any
+Depends: libdrm2
+Description: Utility programs for the kernel DRM interface.  Will void your warranty.

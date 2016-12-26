@@ -11,6 +11,7 @@ DEB_HOST_ARCH_CPU ?= $(shell dpkg-architecture -qDEB_HOST_ARCH_CPU)
 confflags = \
 	--enable-radeon \
 	--enable-amdgpu \
+	--enable-install-test-programs \
 	--disable-libkms \
 	$()
 
@@ -99,6 +100,8 @@ override_dh_auto_install:
 
 override_dh_install:
 	find debian/tmp -name '*.la' -delete
+	rm -f debian/tmp/usr/bin/exynos_fimg2d_perf
+	rm -f debian/tmp/usr/bin/exynos_fimg2d_event
 	dh_install --fail-missing
 
 override_dh_strip:
