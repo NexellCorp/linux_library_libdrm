@@ -12,7 +12,6 @@ confflags = \
 	--enable-radeon \
 	--enable-amdgpu \
 	--enable-install-test-programs \
-	--disable-libkms \
 	$()
 
 # Linux vs. the rest:
@@ -100,8 +99,7 @@ override_dh_auto_install:
 
 override_dh_install:
 	find debian/tmp -name '*.la' -delete
-	rm -f debian/tmp/usr/bin/exynos_fimg2d_perf
-	rm -f debian/tmp/usr/bin/exynos_fimg2d_event
+	rm -f debian/tmp/usr/bin/exynos_*
 	dh_install --fail-missing
 
 override_dh_strip:

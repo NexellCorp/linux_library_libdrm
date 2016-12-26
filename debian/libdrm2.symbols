@@ -167,3 +167,12 @@ libdrm.so.2 libdrm2 #MINVER#
  drmUnmapBufs@Base 2.3.1
  drmUpdateDrawableInfo@Base 2.3.1
  drmWaitVBlank@Base 2.3.1
+libkms.so.1 libdrm2 #MINVER#
+ kms_bo_create@Base 2.4.70-1.1
+ kms_bo_destroy@Base 2.4.70-1.1
+ kms_bo_get_prop@Base 2.4.70-1.1
+ kms_bo_map@Base 2.4.70-1.1
+ kms_bo_unmap@Base 2.4.70-1.1
+ kms_create@Base 2.4.70-1.1
+ kms_destroy@Base 2.4.70-1.1
+ kms_get_prop@Base 2.4.70-1.1
