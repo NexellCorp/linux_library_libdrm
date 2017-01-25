@@ -26,15 +26,14 @@ Package: libdrm-dev
 Section: libdevel
 Architecture: any
 Depends:
- libdrm2 (= ${binary:Version}),
- libdrm-intel1 (= ${binary:Version}) [amd64 i386 kfreebsd-amd64 kfreebsd-i386 x32],
- libdrm-radeon1 (= ${binary:Version}),
- libdrm-nouveau2 (= ${binary:Version}) [linux-any],
- libdrm-amdgpu1 (= ${binary:Version}),
- libdrm-omap1 (= ${binary:Version}) [any-arm],
- libdrm-freedreno1 (= ${binary:Version}) [any-arm arm64],
- libdrm-exynos1 (= ${binary:Version}) [any-arm],
- libdrm-tegra0 (= ${binary:Version}) [any-arm arm64],
+ libdrm2 (= ${binary:Version}) |
+ libdrm-intel1 (= ${binary:Version}) [amd64 i386 kfreebsd-amd64 kfreebsd-i386 x32] |
+ libdrm-radeon1 (= ${binary:Version}) |
+ libdrm-nouveau2 (= ${binary:Version}) [linux-any] |
+ libdrm-amdgpu1 (= ${binary:Version}) |
+ libdrm-omap1 (= ${binary:Version}) [any-arm] |
+ libdrm-exynos1 (= ${binary:Version}) [any-arm] |
+ libdrm-tegra0 (= ${binary:Version}) [any-arm arm64] |
  libdrm-nexell (= ${binary:Version}) [any-arm arm64],
  ${misc:Depends},
 Multi-Arch: same
