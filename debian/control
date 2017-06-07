@@ -32,7 +32,7 @@ Depends:
  libdrm-nouveau2 (= ${binary:Version}) [linux-any] |
  libdrm-amdgpu1 (= ${binary:Version}) |
  libdrm-omap1 (= ${binary:Version}) [any-arm] |
- libdrm-exynos1 (= ${binary:Version}) [any-arm] |
+ libdrm-exynos1 (= ${binary:Version}) [any-arm arm64] |
  libdrm-tegra0 (= ${binary:Version}) [any-arm arm64] |
  libdrm-nexell (= ${binary:Version}) [any-arm arm64],
  ${misc:Depends},
@@ -243,7 +243,7 @@ Description: Userspace interface to msm/kgsl kernel DRM services -- debugging sy
  This package provides the debugging symbols for the libdrm-freedreno1 package.
 
 Package: libdrm-exynos1
-Architecture: any-arm
+Architecture: any-arm arm64
 Depends:
  ${shlibs:Depends},
  ${misc:Depends},
@@ -259,7 +259,7 @@ Description: Userspace interface to exynos-specific kernel DRM services -- runti
 Package: libdrm-exynos1-dbg
 Section: debug
 Priority: extra
-Architecture: any-arm
+Architecture: any-arm arm64
 Depends:
  libdrm-exynos1 (= ${binary:Version}),
  ${misc:Depends},
