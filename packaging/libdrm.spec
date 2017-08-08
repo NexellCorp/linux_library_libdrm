@@ -1,26 +1,27 @@
+%ifarch %{ix86} x86_64 ppc ppc64 ppc64le s390x armv7hl aarch64
+%bcond_without valgrind
+%else
+%bcond_with valgrind
+%endif
+
 Name:           libdrm
 Summary:        Direct Rendering Manager runtime library
-Version:        2.4.70
+Version:        2.4.76
 Release:        20%{?dist}
 License:        MIT
 
-URL:            http://dri.sourceforge.net
-Source0:        http://dri.freedesktop.org/libdrm/%{name}-%{version}.tar.bz2
+URL:            https://dri.freedesktop.org
+Source0:        %{url}/libdrm/%{name}-%{version}.tar.bz2
 
 BuildRequires:  pkgconfig automake autoconf libtool
 BuildRequires:  kernel-headers
 BuildRequires:  libxcb-devel
-%if 0%{?fedora} > 17 || 0%{?rhel} > 6
 BuildRequires:  systemd-devel
 Requires:       systemd
-%else
-BuildRequires:  libudev-devel
-Requires:       udev
-%endif
 BuildRequires:  libatomic_ops-devel
 BuildRequires:  libpciaccess-devel
 BuildRequires:  libxslt docbook-style-xsl
-%ifnarch s390
+%if %{with valgrind}
 BuildRequires:  valgrind-devel
 %endif
 BuildRequires:  xorg-x11-util-macros
@@ -31,7 +32,7 @@ Direct Rendering Manager runtime library
 %package devel
 Summary:        Direct Rendering Manager development package
 Requires:       %{name}%{?_isa} = %{version}-%{release}
-Requires:       kernel-headers >= 2.6.27-0.144.rc0.git2.fc10
+Requires:       kernel-headers
 
 %description devel
 Direct Rendering Manager development package.
@@ -47,13 +48,14 @@ Utility programs for the kernel DRM interface.  Will void your warranty.
 %autosetup -p1
 
 %build
-autoreconf -v --install || exit 1
+autoreconf -vfi
 %configure \
-%ifarch s390
+%if ! %{with valgrind}
     --disable-valgrind \
 %endif
     --disable-vc4 \
 %ifarch %{arm} aarch64
+    --enable-etnaviv-experimental-api \
     --enable-exynos-experimental-api \
     --enable-tegra-experimental-api \
     --enable-vc4 \
@@ -83,10 +85,7 @@ popd
 # NOTE: We intentionally don't ship *.la files
 find %{buildroot} -type f -name "*.la" -delete
 
-for i in r300_reg.h via_3d_reg.h
-do
-rm -f %{buildroot}/usr/include/libdrm/$i
-done
+rm -f %{buildroot}%{_includedir}/%{name}/{r300_reg.h,via_3d_reg.h}
 
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
@@ -105,6 +104,8 @@ done
 %{_libdir}/libdrm_omap.so.1.0.0
 %endif
 %ifarch %{arm} aarch64
+%{_libdir}/libdrm_etnaviv.so.1
+%{_libdir}/libdrm_etnaviv.so.1.0.0
 %{_libdir}/libdrm_exynos.so.1
 %{_libdir}/libdrm_exynos.so.1.0.0
 %{_libdir}/libdrm_freedreno.so.1
@@ -126,8 +127,6 @@ done
 
 %files -n drm-utils
 %license LICENSE.MIT
-%{_bindir}/dristat
-%{_bindir}/drmstat
 %{_bindir}/drmdevice
 %{_bindir}/modetest
 %{_bindir}/modeprint
@@ -135,8 +134,11 @@ done
 %{_bindir}/kmstest
 %{_bindir}/kms-steal-crtc
 %{_bindir}/kms-universal-planes
-%exclude %{_bindir}/exynos*
 %exclude %{_bindir}/drmsl
+%ifarch %{arm} aarch64
+%exclude %{_bindir}/etnaviv*
+%exclude %{_bindir}/exynos*
+%endif
 %exclude %{_bindir}/hash
 %exclude %{_bindir}/proptest
 %exclude %{_bindir}/random
@@ -163,6 +165,7 @@ done
 %ifarch %{arm} aarch64
 %{_includedir}/exynos/
 %{_includedir}/freedreno/
+%{_includedir}/libdrm/etnaviv_drmif.h
 %{_includedir}/nexell/
 %{_includedir}/libdrm/exynos_drmif.h
 %{_includedir}/libdrm/tegra.h
@@ -181,6 +184,7 @@ done
 %{_includedir}/libdrm/nouveau/
 %{_includedir}/libdrm/*_drm.h
 %{_includedir}/libkms
+%{_includedir}/libsync.h
 %{_libdir}/libdrm.so
 %ifarch %{ix86} x86_64 ia64
 %{_libdir}/libdrm_intel.so
@@ -189,6 +193,7 @@ done
 %{_libdir}/libdrm_omap.so
 %endif
 %ifarch %{arm} aarch64
+%{_libdir}/libdrm_etnaviv.so
 %{_libdir}/libdrm_exynos.so
 %{_libdir}/libdrm_freedreno.so
 %{_libdir}/libdrm_tegra.so
@@ -205,6 +210,7 @@ done
 %{_libdir}/pkgconfig/libdrm_omap.pc
 %endif
 %ifarch %{arm} aarch64
+%{_libdir}/pkgconfig/libdrm_etnaviv.pc
 %{_libdir}/pkgconfig/libdrm_exynos.pc
 %{_libdir}/pkgconfig/libdrm_freedreno.pc
 %{_libdir}/pkgconfig/libdrm_tegra.pc
@@ -219,6 +225,42 @@ done
 %{_mandir}/man7/drm*.7*
 
 %changelog
+* Thu Mar 30 2017 Igor Gnatenko <ignatenko@redhat.com> - 2.4.76-1
+- Update to 2.4.76
+
+* Thu Mar 23 2017 Adam Jackson <ajax@redhat.com> - 2.4.75-3
+- Fix pkg-config detection on non-Intel
+
+* Fri Feb 10 2017 Fedora Release Engineering <releng@fedoraproject.org> - 2.4.75-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
+
+* Sat Jan 28 2017 Dave Airlie <airlied@redhat.com> - 2.4.75-1
+- Update to 2.4.75
+
+* Sat Jan 21 2017 Peter Robinson <pbrobinson@fedoraproject.org> 2.4.74-2
+- Enable etnaviv support on aarch64 too
+
+* Thu Dec 01 2016 Igor Gnatenko <i.gnatenko.brain@gmail.com> - 2.4.74-1
+- Update to 2.4.74 (RHBZ #1400154)
+
+* Tue Nov 15 2016 Igor Gnatenko <ignatenko@redhat.com> - 2.4.73-1
+- Update to 2.4.73 (RHBZ #1394986)
+
+* Wed Oct 05 2016 Igor Gnatenko <ignatenko@redhat.com> - 2.4.71-2
+- Enable etnaviv on ARM (RHBZ #1381898, billiboy@mt2015.com)
+
+* Tue Oct 04 2016 Igor Gnatenko <ignatenko@redhat.com> - 2.4.71-1
+- Update to 2.4.71 (RHBZ #1381543)
+
+* Thu Aug 11 2016 Michal Toman <mtoman@fedoraproject.org> - 2.4.70-2
+- No valgrind on MIPS
+
+* Sun Jul 24 2016 Igor Gnatenko <ignatenko@redhat.com> - 2.4.70-1
+- Update to 2.4.70 (RHBZ #1359449)
+
+* Thu Jul 21 2016 Igor Gnatenko <ignatenko@redhat.com> - 2.4.69-1
+- Update to 2.4.69 (RHBZ #1358549)
+
 * Thu Apr 28 2016 Igor Gnatenko <ignatenko@redhat.com> - 2.4.68-1
 - Update to 2.4.68
 
