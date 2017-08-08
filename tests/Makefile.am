@@ -45,3 +45,6 @@ TESTS = \
 check_PROGRAMS = \
 	$(TESTS) \
 	drmdevice
+
+check-programs:
+	@echo $(check_PROGRAMS)
