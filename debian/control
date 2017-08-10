@@ -36,6 +36,7 @@ Depends:
  libdrm-exynos1 (= ${binary:Version}) [any-arm arm64],
  libdrm-tegra0 (= ${binary:Version}) [any-arm arm64],
  libdrm-etnaviv1 (= ${binary:Version}) [armhf],
+ libdrm-nexell (= ${binary:Version}) [any-arm arm64],
  ${misc:Depends},
 Multi-Arch: same
 Description: Userspace interface to kernel DRM services -- development files
