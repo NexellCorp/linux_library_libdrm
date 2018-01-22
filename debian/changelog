@@ -1,15 +1,95 @@
-libdrm (2.4.76-1~ubuntu16.04.2) UNRELEASED; urgency=medium
+libdrm (2.4.89-1.1) xenial; urgency=medium
 
-  * Support nexell drm
+  * Support nexell drm driver
+  * Rebase from libdrm 2.4.89 version
 
- -- Chanho Park <chanho61.park@samsung.com>  Mon, 07 Aug 2017 23:50:22 +0900
+ -- Chanho Park <chanho61.park@samsung.com>  Mon, 22 Jan 2018 19:22:29 +0900
 
-libdrm (2.4.76-1~ubuntu16.04.1) xenial; urgency=medium
+libdrm (2.4.89-1) unstable; urgency=medium
 
-  * Backport to xenial. (LP: #1687981)
-    - use debhelper 9
+  * New upstream release.
+  * Update libdrm2.symbols and shlibs.
+  * Update libdrm-amdgpu1.symbols and shlibs.
+  * Update libdrm-etnaviv1.symbols and shlibs.
+  * Update libdrm-freedreno1.symbols and shlibs.
+  * Bump standards version to 4.1.2.
 
- -- Timo Aaltonen <tjaalton@debian.org>  Wed, 03 May 2017 16:36:59 +0300
+ -- Andreas Boll <andreas.boll.dev@gmail.com>  Mon, 18 Dec 2017 17:47:40 +0100
+
+libdrm (2.4.88-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Update libdrm-amdgpu1.symbols and shlibs.
+
+ -- Andreas Boll <andreas.boll.dev@gmail.com>  Tue, 14 Nov 2017 10:10:19 +0100
+
+libdrm (2.4.85-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Update libdrm-amdgpu1.symbols and shlibs.
+  * Bump standards version to 4.1.1.
+
+ -- Andreas Boll <andreas.boll.dev@gmail.com>  Mon, 30 Oct 2017 14:01:40 +0100
+
+libdrm (2.4.84-2) unstable; urgency=medium
+
+  * libdrm-amdgpu1.symbols: Updated.
+
+ -- Timo Aaltonen <tjaalton@debian.org>  Fri, 13 Oct 2017 10:42:37 +0300
+
+libdrm (2.4.84-1) unstable; urgency=medium
+
+  * New upstream release.
+  * libdrm2.symbols: Updated.
+
+ -- Timo Aaltonen <tjaalton@debian.org>  Fri, 13 Oct 2017 09:10:17 +0300
+
+libdrm (2.4.83-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Timo Aaltonen <tjaalton@debian.org>  Tue, 03 Oct 2017 11:15:26 +0300
+
+libdrm (2.4.82-1) unstable; urgency=medium
+
+  * New upstream release.
+  * debian/upstream/signing-key.asc: add key from Lucas Stach.
+  * Add libdrm-common package for new data files.
+  * debian/*.symbols: add new symbols.
+  * debian/rules: Bump shlibs for the libraries with new symbols.
+  * debian/control: Bump Standards-Version to 4.0.0; no changes needed.
+
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Fri, 28 Jul 2017 22:40:20 +0200
+
+libdrm (2.4.81-2) unstable; urgency=medium
+
+  * Upload to unstable.
+
+ -- Andreas Boll <andreas.boll.dev@gmail.com>  Fri, 23 Jun 2017 11:57:14 +0200
+
+libdrm (2.4.81-1) experimental; urgency=medium
+
+  * New upstream release.
+  * Bump libdrm2's and libdrm-amdgpu1's symbols and shlibs.
+
+ -- Andreas Boll <andreas.boll.dev@gmail.com>  Fri, 09 Jun 2017 10:41:36 +0200
+
+libdrm (2.4.80-1) experimental; urgency=medium
+
+  * New upstream release.
+  * Bump libdrm-amdgpu1's and libdrm-etnaviv1's symbols and shlibs.
+  * Remove libpthread-stubs0-dev build-dep per configure.ac.
+
+ -- Andreas Boll <andreas.boll.dev@gmail.com>  Wed, 19 Apr 2017 15:35:21 +0200
+
+libdrm (2.4.77-1) experimental; urgency=medium
+
+  * Team upload.
+  * New upstream release.
+  * Bump libdrm-amdgpu1 symbols.
+  * Update debian/upstream/signing-key.asc
+
+ -- Jordan Justen <jordan.l.justen@intel.com>  Wed, 05 Apr 2017 02:30:35 -0700
 
 libdrm (2.4.76-1) experimental; urgency=medium
 
@@ -76,13 +156,6 @@ libdrm (2.4.71-1) unstable; urgency=medium
 
  -- Andreas Boll <andreas.boll.dev@gmail.com>  Thu, 06 Oct 2016 10:31:27 +0200
 
-libdrm (2.4.70-1~ubuntu16.04.1) xenial; urgency=medium
-
-  * Backport to xenial. (LP: #1643789)
-    - drop patches that are upstream
-
- -- Timo Aaltonen <tjaalton@debian.org>  Tue, 22 Nov 2016 12:08:50 +0200
-
 libdrm (2.4.70-1) unstable; urgency=medium
 
   * New upstream release.
@@ -110,19 +183,6 @@ libdrm (2.4.68-1) unstable; urgency=medium
   * New upstream release. (LP: #1577735)
 
  -- Timo Aaltonen <tjaalton@debian.org>  Tue, 03 May 2016 14:30:06 +0300
-
-libdrm (2.4.67-1ubuntu0.16.04.2) xenial; urgency=medium
-
-  * add-more-kbl-pciids.diff, remove-invalid-kbl-pciids.diff: Update KBL
-    pciids. (LP: #1600124)
-
- -- Timo Aaltonen <tjaalton@debian.org>  Fri, 12 Aug 2016 09:42:55 +0300
-
-libdrm (2.4.67-1ubuntu0.16.04.1) xenial; urgency=medium
-
-  * Add missing SKL/BXT pci-id's (LP: #1577735)
-
- -- Timo Aaltonen <tjaalton@debian.org>  Tue, 03 May 2016 14:36:23 +0300
 
 libdrm (2.4.67-1) unstable; urgency=medium
 

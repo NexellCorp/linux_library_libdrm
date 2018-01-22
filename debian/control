@@ -27,16 +27,6 @@ Section: libdevel
 Architecture: linux-any kfreebsd-any
 Depends:
  libdrm2 (= ${binary:Version}),
- libdrm-intel1 (= ${binary:Version}) [amd64 i386 kfreebsd-amd64 kfreebsd-i386 x32],
- libdrm-radeon1 (= ${binary:Version}),
- libdrm-nouveau2 (= ${binary:Version}) [linux-any],
- libdrm-amdgpu1 (= ${binary:Version}),
- libdrm-omap1 (= ${binary:Version}) [any-arm],
- libdrm-freedreno1 (= ${binary:Version}) [any-arm arm64],
- libdrm-exynos1 (= ${binary:Version}) [any-arm arm64],
- libdrm-tegra0 (= ${binary:Version}) [any-arm arm64],
- libdrm-etnaviv1 (= ${binary:Version}) [armhf],
- libdrm-nexell (= ${binary:Version}) [any-arm arm64],
  ${misc:Depends},
 Multi-Arch: same
 Description: Userspace interface to kernel DRM services -- development files
@@ -51,6 +41,7 @@ Description: Userspace interface to kernel DRM services -- development files
 Package: libdrm2
 Architecture: linux-any kfreebsd-any
 Depends:
+ libdrm-common (>= ${source:Version}),
  ${shlibs:Depends},
  ${misc:Depends},
 Multi-Arch: same
@@ -63,6 +54,21 @@ Description: Userspace interface to kernel DRM services -- runtime
  OpenGL drivers.
  .
  This package provides the runtime environment for libdrm.
+
+Package: libdrm-common
+Architecture: linux-any
+Depends:
+ ${misc:Depends},
+Multi-Arch: foreign
+Pre-Depends: ${misc:Pre-Depends}
+Description: Userspace interface to kernel DRM services -- common files
+ This library implements the userspace interface to the kernel DRM
+ services.  DRM stands for "Direct Rendering Manager", which is the
+ kernelspace portion of the "Direct Rendering Infrastructure" (DRI).
+ The DRI is currently used on Linux to provide hardware-accelerated
+ OpenGL drivers.
+ .
+ This package provides common files for libdrm.
 
 Package: libdrm2-udeb
 Package-Type: udeb
@@ -218,4 +224,4 @@ Section: Graphics
 Priority: extra
 Architecture: any
 Depends: libdrm2
-Description: Utility programs for the kernel DRM interface.  Will void your warranty.
+Description: Utility programs for the kernel DRM interface.
